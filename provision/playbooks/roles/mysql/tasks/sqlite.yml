@@ -1,0 +1,9 @@
+---
+- name: MySQL | install sqlite packages
+  apt: pkg={{ item }} state=installed
+  tags: sqlite
+  sudo: true
+  with_items:    
+   - php5-sqlite
+   - sqlite3
+   - libsqlite3-dev
