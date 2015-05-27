@@ -63,3 +63,4 @@
     - unzip
     - htop
     - tmux
+    - lsyncd  #rsync
