@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  sudo: true
 
   vars:
     sites_dir: /home/vagrant/sites

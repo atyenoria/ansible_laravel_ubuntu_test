@@ -4,6 +4,7 @@
   register: pathogen_installed
   ignore_errors: true
   tags: vim
+  
 
 - name: Vimrc Config | Install Pathogen
   raw: mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim

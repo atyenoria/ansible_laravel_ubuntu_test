@@ -44,21 +44,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Set up NFS drive.
   nfs_setting = RUBY_PLATFORM =~ /darwin/ || RUBY_PLATFORM =~ /linux/
 
-  # Setup synced folder for site files
-  config.vm.synced_folder "./webroot",
-    "/home/vagrant/sites/" + vconfig["webserver_hostname"],
-    type: "nfs",
-    create: true
+  # # Setup synced folder for site files
+  # config.vm.synced_folder "./webroot",
+  #   "/home/vagrant/sites/" + vconfig["webserver_hostname"],
+  #   type: "nfs",
+  #   create: true
 
   # SSH Set up.
   config.ssh.forward_agent = true
 
   # Run an Ansible playbook on setting the box up
-  if !File.exist?(provision_hosts_file)
-    config.trigger.before :up, :stdout => true, :force => true do
-      run 'ansible-playbook -i ' + boxipaddress + ', --ask-sudo-pass ' + vagrant_dir + '/provision/playbooks/local_up.yml --extra-vars "local_ip_address=' + boxipaddress + '"'
-    end
-  end
+  # if !File.exist?(provision_hosts_file)
+  #   config.trigger.before :up, :stdout => true, :force => true do
+  #     run 'ansible-playbook -i ' + boxipaddress + ', --ask-sudo-pass ' + vagrant_dir + '/provision/playbooks/local_up.yml --extra-vars "local_ip_address=' + boxipaddress + '"'
+  #   end
+  # end
 
   # Run the halt/destroy playbook upon halting or destroying the box
   if File.exist?(provision_hosts_file)
@@ -78,19 +78,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # Create synced folders for each virtual host.
-  vconfig['vhosts'].each do |vhost|
-    site_alias = vhost['alias']
-    folder_path = vhost['path']
-    config.vm.synced_folder folder_path,
-      "/home/vagrant/sites/" + site_alias,
-      create: true,
-      type: "nfs",
-      :nfs => nfs_setting
-  end
+  # vconfig['vhosts'].each do |vhost|
+  #   site_alias = vhost['alias']
+  #   folder_path = vhost['path']
+  #   config.vm.synced_folder folder_path,
+  #     "/home/vagrant/sites/" + site_alias,
+  #     create: true,
+  #     type: "nfs",
+  #     :nfs => nfs_setting
+  # end
 
-  # Create all virtual hosts
-  config.trigger.after [:up, :reload], :stdout => true, :force => true do
-    run 'ansible-playbook -i ' + boxipaddress + ', -K --user=vagrant --private-key=' + vagrant_dir + '/.vagrant/machines/' + boxname + '/virtualbox/private_key ' + vagrant_dir + '/provision/playbooks/virtual_hosts.yml --extra-vars "local_ip_address=' + boxipaddress + '"'
-  end
+  # # Create all virtual hosts
+  # config.trigger.after [:up, :reload], :stdout => true, :force => true do
+  #   run 'ansible-playbook -i ' + boxipaddress + ', -K --user=vagrant --private-key=' + vagrant_dir + '/.vagrant/machines/' + boxname + '/virtualbox/private_key ' + vagrant_dir + '/provision/playbooks/virtual_hosts.yml --extra-vars "local_ip_address=' + boxipaddress + '"'
+  # end
 
 end

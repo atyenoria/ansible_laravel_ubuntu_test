@@ -20,3 +20,46 @@
     - tree
     - vim
     - unzip
+    - autoconf
+    - automake
+    - bison
+    - build-essential
+    - curl
+    - gawk
+    - git-core
+    - git
+    - libxml2-dev
+    - libffi-dev
+    - libyaml-dev
+    - libssl-dev
+    - libsqlite3-dev
+    - libgdbm-dev
+    - libncurses5-dev
+    - libreadline6-dev
+    - libtool
+    - libyaml-dev
+    - nfs-common # make virtualbox faster
+    - pkg-config
+    - sqlite3
+    - vim
+    - wget
+    - zlib1g-dev
+    - htop
+    - iftop
+    - python-pycurl # for postgresql playbook, uses apt_pkg
+    - python-software-properties # for `add-apt-repository` command
+    - fail2ban
+    - ufw
+    - unattended-upgrades
+    - software-properties-common #add-apt-get-repository
+    - mosh #ssh client
+    - fail2ban #firewall
+    - ntp
+    - curl
+    - ack-grep
+    - acl
+    - unattended-upgrades
+    - policykit-1
+    - unzip
+    - htop
+    - tmux
